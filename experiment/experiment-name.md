@@ -1,1 +1,1 @@
-## Experiment name
+## MOMENT OF INERTIA OF FLYWHEEL
