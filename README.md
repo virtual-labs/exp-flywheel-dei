@@ -1,24 +1,24 @@
 ## Introduction
 
 
-<b>Discipline | <b>Fill your discipline name here
+<b>Discipline | <b>Mechanical Engineering
 :--|:--|
-<b> Lab | <b> Fill your lab name here
-<b> Experiment|     <b> Fill your experiment name and number here
+<b> Lab | <b> Engineering Dynamics Lab
+<b> Experiment|     <b> Moment of Inertia of Flywheel
 
 ### About the Experiment 
 
 Fill a brief description of this experiment here
 
-<b>Name of Developer | <b> Fill the name of experiment owner here 
+<b>Name of Developer | <b> Jinshad Uppukode
 :--|:--|
-<b> Institute | <b>  
-<b> Email id|     <b>  
-<b> Department |  
+<b> Institute | <b>  Dayalbagh Educational Institute
+<b> Email id|     <b>  jinshadu@dei.ac.in
+<b> Department |  Civil Engineering
 
 ### Contributors List
 
 SrNo | Name | Faculty or Student | Department| Institute | Email id
 :--|:--|:--|:--|:--|:--|
-1 | . | . | . | . | .
-2 | . | . | . | . | .
+1 | Harsh Pathak | Student | Civil Engineering | Dayalbagh Educational Institute | 06hpathak@gmail.com
+2 | Shivangi Gupta | Student | Civil Engineering | Dayalbagh Educational Institute | guptashivangi95366@gmail.com
