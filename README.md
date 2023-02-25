@@ -20,5 +20,5 @@ Fill a brief description of this experiment here
 
 SrNo | Name | Faculty or Student | Department| Institute | Email id
 :--|:--|:--|:--|:--|:--|
-1 | Harsh Pathak | Student | Civil Engineering | Dayalbagh Educational Institute | 06hpathak@gmail.com
-2 | Shivangi Gupta | Student | Civil Engineering | Dayalbagh Educational Institute | guptashivangi95366@gmail.com
+1 | Harsh Pathak | Student | Mechanical Engineering | Dayalbagh Educational Institute | 06hpathak@gmail.com
+2 | Shivangi Gupta | Student | Mechanical Engineering | Dayalbagh Educational Institute | guptashivangi95366@gmail.com
