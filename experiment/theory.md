@@ -39,6 +39,12 @@ The flywheel in this experiment is a solid disc of mass M1 and radius R attached
 I = Σ (mr^2)/2=  (M_1 R^2)/2+(M_2 r^2)/2
 
 
+
+<p align="center">
+  <img src="images/Theory_4.png">
+</p>
+
+
  
 For complex geometries, the mass moment of Inertia of the flywheel can be estimated by measuring the approximate mass of different simplified geometrical components and adding the Mass Moment of Inertia about the central axis (from the known equations of MI of rings, cylinders, rods, etc).
 
