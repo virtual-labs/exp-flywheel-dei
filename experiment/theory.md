@@ -1,7 +1,13 @@
 # THEORY
 This experiment is an introduction to some basic components of rotational dynamics to develop an understanding of Moment of Inertia
+
 ## Torque and Mass Moment of Inertia
-If a body is free to rotate about a fixed axis, then a torque is required to initiate or change the rotational motion of the body. The torque τ ⃗  of a force about an axis is given by the cross-product of the force F ⃗ and the distance from the axis of rotation ```math r ⃗
+If a body is free to rotate about a fixed axis, then a torque is required to initiate or change the rotational motion of the body.
+
+
+![](images/Theory_1.png)
+
+The torque τ ⃗  of a force about an axis is given by the cross-product of the force F  ⃗ and the distance from the axis of rotation ```math r ⃗
 τ ⃗=r ⃗  × F ⃗ ```.
 
 
