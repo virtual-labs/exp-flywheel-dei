@@ -4,15 +4,18 @@ This experiment is an introduction to some basic components of rotational dynami
 ## Torque and Mass Moment of Inertia
 If a body is free to rotate about a fixed axis, then a torque is required to initiate or change the rotational motion of the body.
 
+<img align="right"  src="images/Theory_1.png">
 
-![](images/Theory_1.png)
+The torque τ ⃗  of a force about an axis is given by the cross-product of the force F  ⃗ and the distance from the axis of rotation
 
-The torque τ ⃗  of a force about an axis is given by the cross-product of the force F  ⃗ and the distance from the axis of rotation ```math r ⃗
-τ ⃗=r ⃗  × F ⃗ ```.
+![](images/Theory_2.png) 
 
 
 The net torque is proportional to the angular acceleration α ⃗ of the body and shall exist during the entire time the torque acts. The equation is given as
-τ ⃗=Iα ⃗.
+
+
+![](images/Theory_3.png) 
+
 
 
 Where I is the constant of the body known as the Mass Moment of Inertia about the specified axis of rotation. Mass moment of inertia (also known as rotational inertia) is a measure of a body’s resistance to a change in its rotation direction or angular momentum. The moment of inertia depends not only on the mass but also the distribution of the mass around the axis. Just as the mass is a measure of resistance of linear acceleration, mass moment of inertia is a measure of resistance to angular acceleration.
