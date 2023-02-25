@@ -52,13 +52,29 @@ For complex geometries, the mass moment of Inertia of the flywheel can be estima
 ## Experimental Setup and Theory
 In the experiment, a hanging mass m attached to the end of a spring, the remainder of which is wrapped around the axle is allowed to fall initiating the necessary torque τ ⃗  to the flywheel system initially at rest. Suppose that the string is wrapped around the axle n times and that a mass m is suspended from its free end and the system is released at time t = 0. As the mass accelerates downward, the flywheel attains an angular acceleration α ⃗. Because of the friction in the bearings, there will be an additional torque in the direction opposite to the motion of the flywheel. This frictional torque (α_f ) ⃗ depends upon a number of factors such as speed of rotation, coefficient of friction, etc but shall be assumed to be a constant value for simplicity.
 
+<p align="center">
+  <img src="images/Theory_5.png">
+</p>
+
 
  
 If T is the tension in the string, then the net torque exerted by the wheel is 
 
 
+<p align="center">
+  <img src="images/Theory_6.png">
+</p>
+
+
+
  
 The net force on the mass m is
+
+
+<p align="center">
+  <img src="images/Theory_6.png">
+</p>
+
 
 
  
