@@ -136,28 +136,28 @@ Applying the individual equations in the law of conservation of energy, we obtai
  
   Where, 	
   
-          I	=	Moment of inertia of the flywheel assembly about its axis
+          I = Moment of inertia of the flywheel assembly about its axis
 
 
-          R	=	Radius of the axle
+          R = Radius of the axle
 
 
-          ω	=	maximum angular velocity (just before detaching)
+          ω = maximum angular velocity (just before detaching)
 
 
-          m	=	total mass of the slotted weights
+          m = total mass of the slotted weights
 
 
-          n	=	Number of revolutions as the slotted weights falls the distance h = initial number of wounds of cord
+          n = Number of revolutions as the slotted weights falls the distance h = initial number of wounds of cord
 
 
-          Wf	=	amount of work done per rotation against bearing friction 
+          Wf = Amount of work done per rotation against bearing friction 
 
 
-          g	=	Acceleration due to gravity
+          g = Acceleration due to gravity
 
 
-          v	=	maximum velocity of slotted weights just before detaching 
+          v = maximum velocity of slotted weights just before detaching 
   
   
 
