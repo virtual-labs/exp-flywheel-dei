@@ -72,7 +72,7 @@ The net force on the mass m is
 
 
 <p align="center">
-  <img src="images/Theory_6.png">
+  <img src="images/Theory_7.png">
 </p>
 
 
@@ -110,6 +110,8 @@ The gain in linear Kinetic Energy (L.K.E)m of the slotted weights just before th
 
 
 If ω is the angular speed of the disc just as the mass hits the ground, then the final velocity of slotted weights is given by
+
+
 v = rω
 
 
@@ -123,6 +125,14 @@ It is worth mentioning that air friction acting on the surface of the rotating d
 
 
 Applying the individual equations in the law of conservation of energy, we obtain
+
+
+<p align="center">
+  <img src="images/Theory_8.png">
+</p>
+
+
+
  
   Where, 	
   
@@ -154,25 +164,54 @@ Applying the individual equations in the law of conservation of energy, we obtai
 Now, even after the mass detaches from the axle, the flywheel will continue to rotate. The angular velocity of the flywheel would decline gradually and finally come to a rest when all is rotational kinetic energy of flywheel (R.K.E)f is spent to overcome the frictional forces. If N is the number of rotation made by the flywheel after the string has left the axle then
 
 
+<p align="center">
+  <img src="images/Theory_9.png">
+</p>
+
  
  
 Substituting the values of v and Wf in the equation,
+
+
+<p align="center">
+  <img src="images/Theory_10.png">
+</p>
 
 
  
 Solving the equation for I, we obtain the following equation for mass moment of inertia of a flywheel which is,
 
 
+<p align="center">
+  <img src="images/Theory_11.png">
+</p>
+
+
  
 The maximum angular velocity ω in the above equation can be found out by calculating the average velocity ωa as the flywheel comes to a final stop.
+
+
+<p align="center">
+  <img src="images/Theory_12.png">
+</p>
 
 
  
 If N revolutions take a time t, then the average angular is given by
 
 
+<p align="center">
+  <img src="images/Theory_13.png">
+</p>
+
+
  
 The above two equations give us a direct relationship between maximum angular velocity, number of rotations after detachment and the time required to complete that revolution
+
+
+<p align="center">
+  <img src="images/Theory_14.png">
+</p>
 
 
  
