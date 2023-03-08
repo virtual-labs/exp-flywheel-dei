@@ -2,7 +2,7 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "For the same material and the mass, which of the following configurations of flywheel will have maximum mass moment of inertia about the axis of rotation",
       "answers": {
         "a": "answer1",
         "b": "answer2",
