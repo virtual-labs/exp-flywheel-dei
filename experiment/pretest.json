@@ -4,9 +4,9 @@
     {
       "question": "For the same material and the mass, which of the following configurations of flywheel will have maximum mass moment of inertia about the axis of rotation",
       "answers": {
-        "a": ![](images/Prestest_1.png),
-        "b": ![](images/Prestest_2.png),
-        "c": ![](images/Prestest_3.png)
+        "a": 11,
+        "b": 112,
+        "c": 1112
         
       
       "correctAnswer": "c",
