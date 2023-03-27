@@ -6,8 +6,9 @@
       "answers": {
         "a": 11,
         "b": 112,
-        "c": 1112
-        
+        "c": 1112,
+        "d": 1555
+      },  
       
       "correctAnswer": "c",
       "difficulty": "beginner"
@@ -72,5 +73,5 @@
       "correctAnswer": "a",
       "difficulty": "beginner"
     }
-  
+  ]
 }
