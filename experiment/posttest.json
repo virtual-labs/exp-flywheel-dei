@@ -32,7 +32,7 @@
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
-    "question": "4.	In an experiment to determine the moment of inertia of a flywheel, which of the following quantities is varied?",
+    "question": "In an experiment to determine the moment of inertia of a flywheel, which of the following quantities is varied?",
       "answers": {
         "a": "Mass of the flywheel",
         "b": "Radius of the flywheel",
