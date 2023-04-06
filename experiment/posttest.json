@@ -22,39 +22,7 @@
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
-    },
-    {
-      "question": "3. Which of the following is true about the moment of inertia of a flywheel",
-      "answers": {
-        "a": "It increases as the mass of the flywheel increases ",
-        "b": "It decreases as the radius of the flywheel decreases ",
-        "c": "It is independent of the shape of the flywheel  ",
-        "d": "It is directly proportional to the speed of rotation of the flywheel"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-{
-      "question": "4.	In an experiment to determine the moment of inertia of a flywheel, which of the following quantities is varied?",
-      "answers": {
-        "a": "Mass of the flywheel",
-        "b": "Radius of the flywheel  ",
-        "c": "Angular velocity of the flywheel   ",
-        "d": "Torque applied to the flywheel"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-{
-      "question": "5.	Which of the following statements is true about the flywheel?",
-      "answers": {
-        "a": "A flywheel stores rotational energy ",
-        "b": "A flywheel stores potential energy ",
-        "c": "A flywheel stores kinetic energy ",
-        "d": "A flywheel stores gravitational energy"
-      },
-      "correctAnswer": "d",
-      "difficulty": "beginner"
     }
+   
   ]
 }
