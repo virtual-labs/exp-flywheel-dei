@@ -4,7 +4,7 @@
     {
       "question": "Which of the following factors affects the moment of inertia of a flywheel?",
       "answers": {
-        "a": "The mass of the flywheel ",
+        "a": "The mass of the flywheel",
         "b": "The radius of the flywheel",
         "c": "The shape of the flywheel ",
         "d": "All of the above"
@@ -12,21 +12,45 @@
       "correctAnswer": "d",
       "difficulty": "beginner"
     },
-    {
-      "question": "This is a Sample Question 2?",
+    "question": "How is the experimental moment of inertia of a flywheel determined?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "By measuring the rotational speed of the flywheel",
+        "b": "By measuring the force required to rotate the flywheel",
+        "c": "By measuring the angular acceleration of the flywheel",
+        "d": "By measuring the radius of the flywheel"
       },
       "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    "question": "Which of the following is true about the moment of inertia of a flywheel?",
+      "answers": {
+        "a": "It increases as the mass of the flywheel increases",
+        "b": "It decreases as the radius of the flywheel decreases",
+        "c": "It is independent of the shape of the flywheel",
+        "d": "It is directly proportional to the speed of rotation of the flywheel"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    "question": "4.	In an experiment to determine the moment of inertia of a flywheel, which of the following quantities is varied?",
+      "answers": {
+        "a": "Mass of the flywheel",
+        "b": "Radius of the flywheel",
+        "c": "Angular velocity of the flywheel",
+        "d": "Torque applied to the flywheel"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which of the following statements is true about the flywheel",
+      "answers": {
+        "a": "A flywheel stores rotational energy",
+        "b": "A flywheel stores potential energy",
+        "c": "A flywheel stores kinetic energy",
+        "d": "A flywheel stores gravitational energy"
+      },
+       "correctAnswer": "a",
       "difficulty": "beginner"
     }
   ]
