@@ -12,6 +12,7 @@
       "correctAnswer": "d",
       "difficulty": "beginner"
     },
+    {
     "question": "How is the experimental moment of inertia of a flywheel determined?",
       "answers": {
         "a": "By measuring the rotational speed of the flywheel",
@@ -22,6 +23,7 @@
       "correctAnswer": "c",
       "difficulty": "beginner"
     },
+    {
     "question": "Which of the following is true about the moment of inertia of a flywheel?",
       "answers": {
         "a": "It increases as the mass of the flywheel increases",
@@ -32,7 +34,8 @@
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
-    "question": "4.	In an experiment to determine the moment of inertia of a flywheel, which of the following quantities is varied?",
+    {
+    "question": "In an experiment to determine the moment of inertia of a flywheel, which of the following quantities is varied?",
       "answers": {
         "a": "Mass of the flywheel",
         "b": "Radius of the flywheel",
