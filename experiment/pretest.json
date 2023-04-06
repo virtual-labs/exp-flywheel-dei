@@ -2,15 +2,15 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "For the same material and the mass, which of the following configurations of flywheel will have maximum mass moment of inertia about the axis of rotation",
+      "question": "What is the unit of moment of inertia?",
       "answers": {
-        "a": 11,
-        "b": 112,
-        "c": 1112,
-        "d": 1555
+        "a": "kg/m",
+        "b": "kg/m^2",
+        "c": "kg/m^3",
+        "d": "kg.m^2"
       },  
       
-      "correctAnswer": "c",
+      "correctAnswer": "d",
       "difficulty": "beginner"
     },
     {
