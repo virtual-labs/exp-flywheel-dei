@@ -2,23 +2,35 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "1.	Which of the following factors affects the moment of inertia of a flywheel?",
+      "question": "This is a Sample Question 1?",
       "answers": {
-        "a": "The mass of the flywheel",
-        "b": "The radius of the flywheel",
-        "c": "The shape of the flywheel ",
-        "d": "All of the above"
+        "a": "answer1",
+        "b": "answer2",
+        "c": "answer3",
+        "d": "answer4"
+      },
+      "explanations": {
+        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "b": "Explanation 2",
+        "c": "Explanation 2",
+        "d": "Explanation 2"
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "2. How is the experimental moment of inertia of a flywheel determined?",
+      "question": "This is a Sample Question 2?",
       "answers": {
-        "a": "By measuring the rotational speed of the flywheel",
-        "b": "By measuring the force required to rotate the flywheel ",
-        "c": "By measuring the angular acceleration of the flywheel ",
-        "d": "By measuring the radius of the flywheel"
+        "a": "answer1",
+        "b": "answer2",
+        "c": "answer3",
+        "d": "answer4"
+      },
+      "explanations": {
+        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "b": "Explanation 2",
+        "c": "Explanation 2",
+        "d": "Explanation 2"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
