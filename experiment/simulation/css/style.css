@@ -201,7 +201,7 @@ canvas#simscreen2
 	top:350px;
 	height: 400px;
 	width: 550px;
-
+}
 canvas#simscreen
 {
 	position:absolute;
@@ -210,7 +210,7 @@ canvas#simscreen
 	height: 400px;
 	width: 550px;
 }
-}
+
 
 div#commentboxleft
 {
