@@ -199,8 +199,8 @@ canvas#simscreen2
 	position:absolute;
 	left:400px;
 	top:350px;
-	height: 400px;
-	width: 550px;
+	height: 500px;
+	width: 750px;
 	border: 1px solid black;
 }
 
@@ -209,8 +209,8 @@ canvas#simscreen
 	position:absolute;
 	left:400px;
 	top:200px;
-	height: 400px;
-	width: 550px;
+	height: 500px;
+	width: 750px;
 	border: 1px solid black;
 }
 
