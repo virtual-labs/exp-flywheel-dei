@@ -66,6 +66,7 @@ div#container
 
 
 	background: url("../images/Background_sim_new.jpg") no-repeat;
+	justify-content: center;
 }
 
 div#simtitle
