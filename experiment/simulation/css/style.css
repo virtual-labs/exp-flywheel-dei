@@ -201,6 +201,7 @@ canvas#simscreen2
 	top:350px;
 	height: 400px;
 	width: 550px;
+	border: 1px solid black;
 }
 
 canvas#simscreen
@@ -210,6 +211,7 @@ canvas#simscreen
 	top:200px;
 	height: 400px;
 	width: 550px;
+	border: 1px solid black;
 }
 
 div#commentboxleft
