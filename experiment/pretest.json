@@ -72,6 +72,30 @@
      
       "correctAnswer": "a",
       "difficulty": "beginner"
+    },
+    {
+      "question": "A steam-engine flywheel turns at 150 rev/min initially. When the driving power is cut, friction causes an angular deceleration of 1.15 rev/min². If the flywheel radius is 0.8 m, what is the net acceleration (magnitude) of a particle at the rim when the angular speed is half the initial value?",
+      "answers": {
+        "a": "30 m/s²",
+        "b": "40 m/s²",
+        "c": "50 m/s²",
+        "d": "60 m/s²"
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Why does the moment of inertia matter physically?",
+      "answers": {
+        "a": "It determines how much linear force is needed to move a body.",
+        "b": "It quantifies a body’s resistance to a change in its angular motion — larger I means a body is harder to start/stop rotating.",
+        "c": "It measures how much gravitational potential energy an object has.",
+        "d": "It tells you the rotational speed directly."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
     }
+
+
   ]
 }

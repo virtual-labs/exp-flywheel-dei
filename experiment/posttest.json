@@ -55,6 +55,28 @@
       },
        "correctAnswer": "a",
       "difficulty": "beginner"
-    }
+    },
+    {
+    "question": "A flywheel rotates freely after the mass detaches. It completes N = 12 rotations before stopping, and the stopwatch shows t = 8 seconds. Compute the average angular velocity during this deceleration phase. (Use ω_avg = 2πN / t)",
+    "answers": {
+      "a": "2.5 rad/s",
+      "b": "4.7 rad/s",
+      "c": "9.4 rad/s",
+      "d": "12.5 rad/s"
+    },
+    "correctAnswer": "c",
+    "difficulty": "beginner"
+  },
+  {
+    "question": "When the falling mass detaches from the axle, the flywheel continues to rotate due to:",
+    "answers": {
+      "a": "The remaining potential energy of the falling mass",
+      "b": "The remaining tension in the string",
+      "c": "The rotational kinetic energy stored in the flywheel",
+      "d": "The torque due to air resistance"
+    },
+    "correctAnswer": "c",
+    "difficulty": "beginner"
+  }
   ]
 }
