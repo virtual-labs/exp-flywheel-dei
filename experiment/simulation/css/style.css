@@ -1,6 +1,6 @@
 div#omega_, #n_1, #n_2, #t_, #pracMoI {
     position:absolute;
-	left:1100px;
+	left:1110px;
 	height: 22px;
 	width: 250px;
 	text-align: left;
@@ -20,6 +20,16 @@ div#omega_, #n_1, #n_2, #t_, #pracMoI {
 }
 #pracMoI{
 	top:470px;
+}
+#errorNote {
+    position:absolute;
+    left:1100px;
+    top:720px;
+    height: 40px;
+    width: 225px;
+    text-align: left;
+    font-size: 15px;
+    color: red;
 }
 
 .container1 {
@@ -140,7 +150,7 @@ div#theo_inertia
 {
 	position:absolute;
 	left:40px;
-	top:490px;
+	top:540px;
 	height: 22px;
 	width: 200px;
 	text-align: center;
@@ -174,9 +184,9 @@ div#theoMoI
 {
 	position:absolute;
 	left:45px;
-	top:550px;
+	top:540px;
 	height: 22px;
-	width: 200px;
+	width: 220px;
 	text-align: left;
 	font-size: 16px;
 	font-family:serif;
@@ -394,6 +404,28 @@ div#controls
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	/* overflow-y: scroll; */
 }
+#textarea2{
+  position : absolute;
+  left : 1100px;
+  top : 515px;
+  border-top-style: dotted;
+	border-top-width: 2px;
+	border-top-color: #f56d6d;
+	border-left-style: dotted;
+	border-left-width: 2px;
+	border-left-color: #f56d6d;
+	border-right-style: dotted;
+	border-right-width: 2px;
+	border-right-color: #f56d6d;
+	border-bottom-style: dotted;
+	border-bottom-width: 2px;
+	border-bottom-color: #f56d6d;
+	color: #f56d6d;
+	text-align: left;
+	font-size: 14px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	/* overflow-y: scroll; */
+}
 #textarea1{
   position : absolute;
   left : 35px;
@@ -416,6 +448,13 @@ div#controls
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	/* overflow-y: scroll; */
 }
+#result1{
+	position:absolute;
+	left :35px;
+	top:485px;
+	color:green;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
 #result{
 	position:absolute;
 	left :1100px;
@@ -423,6 +462,7 @@ div#controls
 	color:green;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
 #ruler{
   position : absolute;
   left : 220px;

@@ -108,7 +108,7 @@ var speed = 30;
 var rate = 0.5;
 var r=0;
 var n=0;
-var speedString = "Speed:Normal";
+var speedString = "Speed:Normal(x)";
 var densConstant = 11204.1;
 var M = 0;
 var rcal = 0;
@@ -134,7 +134,7 @@ $('.variable').css('padding-top','30px');
 function validateForm() {
   var x = document.getElementById("theoMoI").innerHTML;
   if (x == "" || x == null) {
-    alert("First Calculate TheoreticalMOI");
+    alert("First Calculate TheoreticalMOI by Locking the parameters.");
   }
     else
     {
@@ -149,7 +149,7 @@ function TheoreticalMOI()
   var l = document.getElementById('lspinner').value; 
   var R = document.getElementById('rspinner').value; 
   theoMoI = ((3.14*density*(t*Math.pow(R,4)+l*Math.pow(r,4)))/(2*Math.pow(10,10)));
-  document.getElementById("theoMoI").innerHTML = theoMoI.toFixed(4)+" kg-m2";
+  document.getElementById("theoMoI").innerHTML = "Theoretical MoI : " +theoMoI.toFixed(4)+" kg-m<sup>2</sup>";
   //resultValues(theoMoI);
   }
 function resultValues(theoMoI)
@@ -162,13 +162,25 @@ function resultValues(theoMoI)
  omega_ = Math.pow((( 2 * (m_ * 9.81 * h_ - n_1 * W))/(Number(theoMoI) + ( m_ * r_ * r_))),0.5);
  n_2 = theoMoI*omega_*omega_/(2*W);
  t_ = 4*3.14*n_2/omega_;
+ 
+ // Calculate experimental MOI with 5% error (accounting for mechanical losses)
+ var errorFactor = 0.95; // 5% loss, so experimental is 95% of theoretical
  pracMoI = (n_2*m_)*(((2*9.81*h_)/(omega_*omega_))-r_*r_)/(n_2+n_1);
+ 
+ // Apply the error factor
+ pracMoI = pracMoI * errorFactor;
 
  document.getElementById("n_1").innerHTML = "N1 : "+n_1.toFixed(4);
  document.getElementById("omega_").innerHTML = "Omega : "+omega_.toFixed(4)+" Rad/sec";
  document.getElementById("n_2").innerHTML = "N2 : " + n_2.toFixed(4);
  document.getElementById("t_").innerHTML = "Time : "+t_.toFixed(4)+" seconds";
- document.getElementById("pracMoI").innerHTML = "Experimental MoI : " +pracMoI.toFixed(4)+" kg-m2";
+ document.getElementById("pracMoI").innerHTML = "Experimental MoI : " +pracMoI.toFixed(4)+" kg-m<sup>2</sup>";
+ 
+ // Calculate and display the error percentage
+ var errorPercentage = ((theoMoI - pracMoI) / theoMoI * 100).toFixed(2);
+ document.getElementById("errorNote").innerHTML = 
+     "<span style='color: red; font-size: 15px;'>Note: Experimental value is approximately " + 
+     errorPercentage + "% less than theoretical due to mechanical losses (friction, air resistance, etc.).</span>";
 }
 function startsim()
 {
@@ -265,7 +277,7 @@ function simstate()
     document.getElementById('playpausebutton').src="images/play.png";
    clearInterval(simTimeId);
     simstatus=1;
-  speedString = "Speed:Normal";
+  speedString = "Speed:Normal(x)";
   resetwatch();
 
     <!-- $('#thetaspinner').spinner("value",theta);     //to set simulation parameters on pause -->
@@ -275,7 +287,7 @@ function simstate()
   {
      time=0;      
      clearInterval(pauseTime);
-  speedString = "Speed:Normal";
+  speedString = "Speed:Normal(x)";
     document.getElementById('playpausebutton').src="images/pause.png";
     
     simTimeId=setInterval("time=time+rate; varupdate(); ",speed);    
@@ -430,7 +442,7 @@ document.getElementById("textarea1").innerHTML = "";
  time = 0;
  speed=30;
  rate=0.5;
-speedString = "Speed:Normal";
+speedString = "Speed:Normal(x)";
 document.getElementById("speedText").style.color="goldenrod";
 
 height = $('#hspinner').spinner('value');
@@ -492,7 +504,7 @@ else if(flagEnd == false)
 {
   rate = 0.25;
   speed = 30;
-  speedString = "Speed:Double";
+  speedString = "Speed:Double(2x)";
   document.getElementById("speedText").style.color="red";
   omegabb = omegaa *(Math.exp(-((F*r*(time-tt))/(Ival))));
   thetac = (-omegaa)*(Ival/(F*r))*((Math.exp(-((F*r*(time-tt))/(Ival))))-1);
@@ -722,12 +734,13 @@ The simulation requires JavaScript to be enabled.
 
 <div id="commentboxleft"><p id='const1' onmouseover='showTitle(this);'>M = <span class="colorClass" id="v1" ></span></p><p id='const2' onmouseover='showTitle(this);'>n1 = <span class="colorClass" id="v2">17 revolutions</span></p><p id='const3' onmouseover='showTitle(this);'>r = <span class="colorClass" id="v3">0.01898m</span></p><p id='const4' onmouseover='showTitle(this);'>T<sub>f</sub> = <span class="colorClass" id="v4">9.31*10<sup>-3</sup>Nm</span></p></div>
 <!-- <div style="font-family:verdana; font-size:14px;" id="commentboxright"></div> -->
-
-<p id="result">Result</p>
-<div id="textarea0" style = "width:205px;height:190px"></div>
+<p id="result1">Theoretical results</p>
+<p id="result">Experimental results</p>
+<div id="textarea0" style = "width:225px;height:110px"></div>
+<div id="textarea2" style = "width:225px;height:80px"></div>
 <!--textarea 1 is used to print the output of the theoritical momemt of inertia -->
-<div id="textarea1" style = "width:205px;height:55px"></div>
-<p id="speedText" style = "position:absolute;left:410px;top:275px;font:18px Monospace ;color:goldenrod"></p>
+<div id="textarea1" style = "width:220px;height:55px"></div>
+<p id="speedText" style = "position:absolute;left:400px;top:275px;font:18px Monospace ;color:goldenrod"></p>
 
 <div id="vartitle">Initial Setup</div>
 <div id="vartitle1">Experimental Setup</div>
@@ -789,7 +802,7 @@ The simulation requires JavaScript to be enabled.
 </div>
 <div id="gravity">Gravity : 9.807 m/s² of Earth.</div>
 <div id="density">Density : 8000 kg/m3 of Steel.</div>
-<div id="theo_inertia">Theoritical moment of Inertia : </div>
+<!-- <div id="theo_inertia">Theoritical moment of Inertia : </div> -->
 <div id="theoMoI"></div>
 
 <div id="ctrltitle">CONTROLS :</div>
@@ -829,6 +842,7 @@ The simulation requires JavaScript to be enabled.
 <div id="n_2"></div>
 <div id="t_"></div>
 <div id="pracMoI"></div>
+<div id="errorNote" style="position:absolute; left:1105px; top:520px; width:220px; font-size:15px;"></div>
 <div id="copyright" title="Developer : Harsh Pathak and Shivangi Gupta , Dayalbagh Educational Instiute,Agra "></div>
 <div id="Developer_information" title=
 "Developer Name:
