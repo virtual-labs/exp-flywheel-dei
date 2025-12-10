@@ -85,7 +85,7 @@ If the frictional torque is constant, then the angular acceleration of the syste
 As the slotted weight falls a particular height, it loses its potential energy. The loss in potential energy during unwinding is converted into its translational kinetic energy and rotational kinetic energy of the flywheel. Some of the energy is lost in overcoming frictional forces in the bearings. Applying the law of conservation of energy at the instant the mass hits the ground (string detaches):
 
 $$
-(P.E)_{m} = (R.K.E.)_{f} + (L.K.E.)_{m} + \text{Frictional losses}
+(P.E)\_{m} = (R.K.E.)\_{f} + (L.K.E.)\_{m} + \text{Frictional losses}
 $$
 
 #### Loss of Potential Energy
@@ -93,7 +93,7 @@ $$
 The loss of potential energy $(P.E)_{m}$ of the slotted weights as it hits the ground is given as:
 
 $$
-(P.E)_{m} = mgh = mg(2\pi rN_{1})
+(P.E)\_{m} = mgh = mg(2\pi rN\_{1})
 $$
 
 Note that we have neglected the thickness of the cord since the radius of elastic cord cannot be determined experimentally. Another source of error is the slipping of the cord from the axle during unwinding.
