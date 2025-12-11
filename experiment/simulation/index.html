@@ -200,6 +200,7 @@ let second = 00;
 let count = 00;
  timer = true;
 	stopWatch();
+  document.getElementById("speedNote")?.classList.remove("paused");
 }
 function pausewatch(){
 
@@ -209,12 +210,14 @@ let second = 00;
 let count = 00;
 	timer = false;
   stopWatch();
+  document.getElementById("speedNote")?.classList.add("paused");
 
 }
 function resetwatch(){
 
 	timer = false;
   stopWatch();
+  document.getElementById("speedNote")?.classList.add("paused");
   timerStartedOnTouch = false;
 	
 	minute = 0;
