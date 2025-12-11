@@ -1,6 +1,6 @@
 div#omega_, #n_1, #n_2, #t_, #pracMoI {
     position:absolute;
-	left:1110px;
+	left:1100px;
 	height: 22px;
 	width: 250px;
 	text-align: left;
@@ -68,21 +68,20 @@ div#omega_, #n_1, #n_2, #t_, #pracMoI {
 #reset {
     background-color: #c91400;
 }
-div#container 
-{
-	width: 1330PX;
-	height:610PX ;
-	
 
-
-	background: url("../images/Background_sim_new.jpg") no-repeat;
-	justify-content: center;
+div#container {
+  width: 1330px;
+  height: 610px;
+  margin: 0 auto;           /* centers the container horizontally */
+  position: relative;       /* makes absolutely-positioned children position relative to this box */
+  background: url("../images/Background_sim_new.jpg") no-repeat center top;
+  background-size: auto;    /* or 'cover' if you prefer scaling */
 }
 
 div#simtitle
 {
 	position:absolute;
-	left:350px;
+	left:320px;
 	top:42px;
 	height: 40px;
 	width: 650px;
@@ -105,7 +104,7 @@ div#vartitle
 div#vartitle1
 {
 	position:absolute;
-	left:1140px;
+	left:1120px;
 	top:120px;
 	height: 25px;
 	width: 150px;
@@ -384,7 +383,7 @@ div#controls
 
 #textarea0{
   position : absolute;
-  left : 1100px;
+  left : 1090px;
   top : 385px;
   border-top-style: dotted;
 	border-top-width: 2px;
@@ -406,7 +405,7 @@ div#controls
 }
 #textarea2{
   position : absolute;
-  left : 1100px;
+  left : 1090px;
   top : 515px;
   border-top-style: dotted;
 	border-top-width: 2px;
@@ -457,7 +456,7 @@ div#controls
 }
 #result{
 	position:absolute;
-	left :1100px;
+	left :1090px;
 	top:345px;
 	color:green;
 	font-family: "Comic Sans MS", cursive, sans-serif;
@@ -1285,8 +1284,8 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 
 #speedNote {
   position: absolute;
-  left: 270px;
-  top: 575px;
+  left: 265px;
+  top: 570px;
   width: 800px;
   font-size: 13px;
   color: red;
@@ -1296,7 +1295,8 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
   animation: blink 1s infinite;
   padding: 8px;
   border: 2px solid red;
-  border-radius: 5px;
+  border-radius: 2px;
+  border-style: dotted;
 }
 
 #speedNote.visible {
