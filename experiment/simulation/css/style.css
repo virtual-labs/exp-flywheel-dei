@@ -1302,3 +1302,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 #speedNote.visible {
   display: block;
 }
+#speedNote.paused {
+animation-play-state: paused;
+opacity: 1;
+}
