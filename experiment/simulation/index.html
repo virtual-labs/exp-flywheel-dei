@@ -60,6 +60,8 @@ var ctx;
 var simTimeId = setInterval("",'1000');
 var pauseTime = setInterval("",'1000');
 var time=0;
+// flag to ensure stopwatch starts only once when bob touches ground
+var timerStartedOnTouch = false;
 //point tracing section
 var ptx = [];
 var pty = [];
@@ -152,7 +154,7 @@ function TheoreticalMOI()
   document.getElementById("theoMoI").innerHTML = "Theoretical MoI : " +theoMoI.toFixed(4)+" kg-m<sup>2</sup>";
   //resultValues(theoMoI);
   }
-function resultValues(theoMoI)
+function resultValues(theoMoI, elapsedTime)
 {
  h_ = document.getElementById('hspinner').value; 
  r_ = document.getElementById('Rspinner').value/100;
@@ -173,7 +175,7 @@ function resultValues(theoMoI)
  document.getElementById("n_1").innerHTML = "N1 : "+n_1.toFixed(4);
  document.getElementById("omega_").innerHTML = "Omega : "+omega_.toFixed(4)+" Rad/sec";
  document.getElementById("n_2").innerHTML = "N2 : " + n_2.toFixed(4);
- document.getElementById("t_").innerHTML = "Time : "+t_.toFixed(4)+" seconds";
+ document.getElementById("t_").innerHTML = "Time : "+(elapsedTime || 0).toFixed(4)+" seconds";
  document.getElementById("pracMoI").innerHTML = "Experimental MoI : " +pracMoI.toFixed(4)+" kg-m<sup>2</sup>";
  
  // Calculate and display the error percentage
@@ -213,6 +215,7 @@ function resetwatch(){
 
 	timer = false;
   stopWatch();
+  timerStartedOnTouch = false;
 	
 	minute = 0;
 	second = 0;
@@ -279,6 +282,7 @@ function simstate()
     simstatus=1;
   speedString = "Speed:Normal(x)";
   resetwatch();
+  timerStartedOnTouch = false;
 
     <!-- $('#thetaspinner').spinner("value",theta);     //to set simulation parameters on pause -->
     pauseTime=setInterval("varupdate();",'100');
@@ -288,11 +292,13 @@ function simstate()
      time=0;      
      clearInterval(pauseTime);
   speedString = "Speed:Normal(x)";
+  document.getElementById("speedNote").classList.remove("visible");
     document.getElementById('playpausebutton').src="images/pause.png";
     
     simTimeId=setInterval("time=time+rate; varupdate(); ",speed);    
     simstatus=0;
-    playwatch();
+    // stopwatch will start only when bob touches ground
+    timerStartedOnTouch = false;
 
     
   } 
@@ -444,6 +450,7 @@ document.getElementById("textarea1").innerHTML = "";
  rate=0.5;
 speedString = "Speed:Normal(x)";
 document.getElementById("speedText").style.color="goldenrod";
+document.getElementById("speedNote").classList.remove("visible");
 
 height = $('#hspinner').spinner('value');
 o2.ycoord=315-height*120;//-height*10; 
@@ -506,6 +513,7 @@ else if(flagEnd == false)
   speed = 30;
   speedString = "Speed:Double(2x)";
   document.getElementById("speedText").style.color="red";
+  document.getElementById("speedNote").classList.add("visible");
   omegabb = omegaa *(Math.exp(-((F*r*(time-tt))/(Ival))));
   thetac = (-omegaa)*(Ival/(F*r))*((Math.exp(-((F*r*(time-tt))/(Ival))))-1);
   flagShift = true;
@@ -514,7 +522,9 @@ else if(flagEnd == false)
   if(omegabb<=0.05)
   {
     pausewatch();
-    resultValues(theoMoI);
+    // Calculate total elapsed time from stopwatch (in seconds)
+    var elapsedTime = minute * 60 + second + count / 100;
+    resultValues(theoMoI, elapsedTime);
     clearInterval(simTimeId);
     flagEnd =true;
     
@@ -576,6 +586,14 @@ else if(flagEnd == false)
   o1.xcoord=425;
 }
 document.getElementById("v1").innerHTML =M.toFixed(3)+"kg";
+
+// start stopwatch when bob touches ground (use a1.ycoord as ground reference)
+if (simstatus==0 && !timerStartedOnTouch && typeof o2 !== 'undefined' && typeof a1 !== 'undefined'){
+    if (o2.ycoord >= a1.ycoord){
+        timerStartedOnTouch = true;
+        playwatch();
+    }
+}
 
 draw();
 
@@ -681,11 +699,11 @@ function draw()
   var ctx=k.getContext("2d");
   
   
-   <!-- ctx.beginPath(); -->
-  <!-- ctx.fillStyle="goldenrod"; -->
-  <!-- ctx.font = "14px Comic Sans MS" -->
-  <!-- ctx.fillText(speedString,45,95); -->-
-  <!-- ctx.closePath(); -->
+   // ctx.beginPath();
+  // ctx.fillStyle="goldenrod";
+  // ctx.font = "14px Comic Sans MS"
+  // ctx.fillText(speedString,45,95);
+  // ctx.closePath();
 
    
 //Pivot and centre 
@@ -740,7 +758,7 @@ The simulation requires JavaScript to be enabled.
 <div id="textarea2" style = "width:225px;height:80px"></div>
 <!--textarea 1 is used to print the output of the theoritical momemt of inertia -->
 <div id="textarea1" style = "width:220px;height:55px"></div>
-<p id="speedText" style = "position:absolute;left:400px;top:275px;font:18px Monospace ;color:goldenrod"></p>
+<p id="speedText" style = "position:absolute;left:380px;top:275px;font:18px Monospace ;color:goldenrod"></p>
 
 <div id="vartitle">Initial Setup</div>
 <div id="vartitle1">Experimental Setup</div>
@@ -835,7 +853,7 @@ The simulation requires JavaScript to be enabled.
     </div>
   </div>
 
-
+<div id="speedNote">⚠️ Speed: Double (2x) refers only to visual animation speed and does not affect actual ω or MOI calculations</div>
 <div id="resultValue"></div>
 <div id="n_1"></div>
 <div id="omega_"></div>
