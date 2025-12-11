@@ -1,0 +1,880 @@
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<!--Developer Name:
+             1.Harsh Pathak
+               (06hpathak@gmail.com)
+             2.Shivangi Gupta
+               (guptashivangi95366@gmail.com)
+Instiute Name: Dayalbagh Educational Instiute, Agra -->
+
+<title>Disc Type Flywheel</title>
+<link rel="icon" type="image/x-icon" href="images/dei_logo.ico">
+<link rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src= "js/jquery_1.js"></script>
+<script type="text/javascript" src= "js/jquery_2.js"></script>
+<script type="application/json" src='js/jquery.map'></script>
+<script type="text/javascript" src= "js/script.js"></script>
+<script type="text/javascript" src= "js/script2.js"></script>
+
+<script type="text/javascript">
+
+var simstatus=1; 
+var rotstatus=1;
+
+var commenttext="Some Text";
+var commentloc=0;
+
+var trans= new point(200,100);
+var trans1= new point(350,150);
+
+var o= new point(0,0,"o");
+var a= new point(0,0,"a");
+var b= new point(0,0,"b");
+var c= new point(0,0,"c");
+var d= new point(0,0,"d");
+var e= new point(0,0,"e");
+var f= new point(0,0,"f");
+var g= new point(0,0,"g");
+var h= new point(0,0,"h");
+var i= new point(0,0,"i ");
+var cn1= new point(0,0,"j");
+var l= new point(0,0,"l");
+var cn2= new point(0,0,"k");
+var o1= new point(0,0," ");
+var o2=new point(0,0," ");
+var a1= new point(0,0," ");
+var a2= new point(0,0," ");
+var h1= new point(0,0," ");
+var h2= new point(0,0," ");
+
+
+
+var flaggrashof=true;
+
+
+
+var canvas;
+var ctx;
+//timing section
+var simTimeId = setInterval("",'1000');
+var pauseTime = setInterval("",'1000');
+var time=0;
+// flag to ensure stopwatch starts only once when bob touches ground
+var timerStartedOnTouch = false;
+//point tracing section
+var ptx = [];
+var pty = [];
+ptxdot=[];
+ptxddot=[];
+ptxdddot=[];
+//click status of legend and quick reference
+var legendCS = false;
+var quickrefCS = false;
+var temp=0;
+var offset=0;
+
+
+
+//new Calculation
+
+
+var n1 = 17;
+var n2 = 0;
+var thetaa = 0;
+var thetab = 0;
+var thetac = 0;
+var thetad = 0;
+var thetaRot = 0;
+
+var F = 0.4;
+
+var t = 0;
+var dt = 0;
+var omegaa = 0;
+var omegab = 0;
+var omegabb = 0;
+var i=0, j=0;
+var gvt = 9.81;
+var flagEnd = false;
+var flagShift = false;
+var tt = 0;
+var radius= 0;
+var radius_axle=0;
+var len_axle=0;
+var m = 0;
+var height = 0;
+var Iuser = 0;
+var vel = 0;
+var speed = 30;
+var rate = 0.5;
+var r=0;
+var n=0;
+var speedString = "Speed:Normal(x)";
+var densConstant = 11204.1;
+var M = 0;
+var rcal = 0;
+var density = 8000;
+
+
+// new variables 
+var theoMoI=0;
+var W=0.4;
+var n_1 =0;
+var h_ =0;
+var r_ = 0;
+var m_ = 0;
+var omega_ = 0;
+var n_2 = 0;
+var t_ = 0;
+var MoI = 0;
+var pracMoI = 0;
+function editcss()
+{
+$('.variable').css('padding-top','30px');
+}
+function validateForm() {
+  var x = document.getElementById("theoMoI").innerHTML;
+  if (x == "" || x == null) {
+    alert("First Calculate TheoreticalMOI by Locking the parameters.");
+  }
+    else
+    {
+    simstate();  
+  }
+}
+
+function TheoreticalMOI()
+{
+  var r = document.getElementById('Rspinner').value; 
+  var t = document.getElementById('tspinner').value; 
+  var l = document.getElementById('lspinner').value; 
+  var R = document.getElementById('rspinner').value; 
+  theoMoI = ((3.14*density*(t*Math.pow(R,4)+l*Math.pow(r,4)))/(2*Math.pow(10,10)));
+  document.getElementById("theoMoI").innerHTML = "Theoretical MoI : " +theoMoI.toFixed(4)+" kg-m<sup>2</sup>";
+  //resultValues(theoMoI);
+  }
+function resultValues(theoMoI, elapsedTime)
+{
+ h_ = document.getElementById('hspinner').value; 
+ r_ = document.getElementById('Rspinner').value/100;
+ m_ = document.getElementById('mspinner').value;
+ 
+ n_1 = h_/(2*3.14*r_);
+ omega_ = Math.pow((( 2 * (m_ * 9.81 * h_ - n_1 * W))/(Number(theoMoI) + ( m_ * r_ * r_))),0.5);
+ n_2 = theoMoI*omega_*omega_/(2*W);
+ t_ = 4*3.14*n_2/omega_;
+ 
+ // Calculate experimental MOI with 5% error (accounting for mechanical losses)
+ var errorFactor = 0.95; // 5% loss, so experimental is 95% of theoretical
+ pracMoI = (n_2*m_)*(((2*9.81*h_)/(omega_*omega_))-r_*r_)/(n_2+n_1);
+ 
+ // Apply the error factor
+ pracMoI = pracMoI * errorFactor;
+
+ document.getElementById("n_1").innerHTML = "N1 : "+n_1.toFixed(4);
+ document.getElementById("omega_").innerHTML = "Omega : "+omega_.toFixed(4)+" Rad/sec";
+ document.getElementById("n_2").innerHTML = "N2 : " + n_2.toFixed(4);
+ document.getElementById("t_").innerHTML = "Time : "+(elapsedTime || 0).toFixed(4)+" seconds";
+ document.getElementById("pracMoI").innerHTML = "Experimental MoI : " +pracMoI.toFixed(4)+" kg-m<sup>2</sup>";
+ 
+ // Calculate and display the error percentage
+ var errorPercentage = ((theoMoI - pracMoI) / theoMoI * 100).toFixed(2);
+ document.getElementById("errorNote").innerHTML = 
+     "<span style='color: red; font-size: 15px;'>Note: Experimental value is approximately " + 
+     errorPercentage + "% less than theoretical due to mechanical losses (friction, air resistance, etc.).</span>";
+}
+function startsim()
+{
+
+  simTimeId=setInterval("time=time+0.1; varupdate(); ",'100');
+
+  
+}
+function playwatch(){
+
+ 
+
+let minute = 00;
+let second = 00;
+let count = 00;
+ timer = true;
+	stopWatch();
+  document.getElementById("speedNote")?.classList.remove("paused");
+}
+function pausewatch(){
+
+
+let minute = 00;
+let second = 00;
+let count = 00;
+	timer = false;
+  stopWatch();
+  document.getElementById("speedNote")?.classList.add("paused");
+
+}
+function resetwatch(){
+
+	timer = false;
+  stopWatch();
+  document.getElementById("speedNote")?.classList.add("paused");
+  timerStartedOnTouch = false;
+	
+	minute = 0;
+	second = 0;
+	count = 0;
+	
+	document.getElementById('min').innerHTML = "00";
+	document.getElementById('sec').innerHTML = "00";
+	document.getElementById('count').innerHTML = "00";
+
+}
+
+function stopWatch() {
+	if (timer) {
+		count++;
+
+		if (count == 100) {
+			second++;
+			count = 0;
+		}
+
+		if (second == 60) {
+			minute++;
+			second = 0;
+		}
+
+		
+
+	
+		let minString = minute;
+		let secString = second;
+		let countString = count;
+
+		
+		if (minute < 10) {
+			minString = "0" + minString;
+		}
+
+		if (second < 10) {
+			secString = "0" + secString;
+		}
+
+		if (count < 10) {
+			countString = "0" + countString;
+		}
+
+		
+		document.getElementById('min').innerHTML = minString;
+		document.getElementById('sec').innerHTML = secString;
+		document.getElementById('count').innerHTML = countString;
+		setTimeout(stopWatch, 10);
+	}
+}
+
+
+function simstate()
+{
+  
+  var imgfilename=document.getElementById('playpausebutton').src;
+  imgfilename = imgfilename.substring(imgfilename.lastIndexOf('/') + 1, imgfilename.lastIndexOf('.'));
+  if (imgfilename=="pause")
+  {
+    document.getElementById('playpausebutton').src="images/play.png";
+   clearInterval(simTimeId);
+    simstatus=1;
+  speedString = "Speed:Normal(x)";
+  resetwatch();
+  timerStartedOnTouch = false;
+
+    <!-- $('#thetaspinner').spinner("value",theta);     //to set simulation parameters on pause -->
+    pauseTime=setInterval("varupdate();",'100');
+  }
+    if (imgfilename=="play")
+  {
+     time=0;      
+     clearInterval(pauseTime);
+  speedString = "Speed:Normal(x)";
+  document.getElementById("speedNote").classList.remove("visible");
+    document.getElementById('playpausebutton').src="images/pause.png";
+    
+    simTimeId=setInterval("time=time+rate; varupdate(); ",speed);    
+    simstatus=0;
+    // stopwatch will start only when bob touches ground
+    timerStartedOnTouch = false;
+
+    
+  } 
+}
+
+
+
+function varinit()
+{
+varchange();    
+//Variable r slider and number input types
+$('#rslider').slider("value", 12);  
+$('#rspinner').spinner("value", 12);
+//Variable m slider and number input types
+$('#mslider').slider("value", 0.6); 
+$('#mspinner').spinner("value", 0.6);
+//$('#Mslider').slider("value", 8); 
+//$('#Mspinner').spinner("value", 8);
+$('#tslider').slider("value", 3); 
+$('#tspinner').spinner("value", 3);
+$('#lslider').slider("value", 40); 
+$('#lspinner').spinner("value", 40);
+$('#Rslider').slider("value", 1.4); 
+$('#Rspinner').spinner("value", 1.4);
+$('#hslider').slider("value", 1); 
+$('#hspinner').spinner("value", 1);
+
+}
+
+function varchange()
+{
+//Variable r slider and number input types
+$('#rslider').slider({ max : 15, min : 10, step : 1 });   // slider initialisation : jQuery widget
+$('#rspinner').spinner({ max : 15, min : 10, step : 1 });   // number initialisation : jQuery widget      
+$( "#rslider" ).on( "slide", function( e, ui ) { $('#rspinner').spinner("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);});
+$( "#rspinner" ).on( "spin", function( e, ui ) { $('#rslider').slider("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#rspinner" ).on( "change", function() {  varchange() } );
+
+//Variable m slider and number input types
+$('#mslider').slider({ max : 1.0, min : 0.2 , step : 0.2 });   // slider initialisation : jQuery widget
+$('#mspinner').spinner({ max : 1.0, min : 0.2, step : 0.2});   // number initialisation : jQuery widget      
+$( "#mslider" ).on( "slide", function( e, ui ) { $('#mspinner').spinner("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#mspinner" ).on( "spin", function( e, ui ) { $('#mslider').slider("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#mspinner" ).on( "change", function() {  varchange() } );
+
+//Variable h slider and number input types
+$('#hslider').slider({ max : 1.5, min : 0.5, step : 0.5 });   // slider initialisation : jQuery widget
+$('#hspinner').spinner({ max : 1.5, min : 0.5, step : 0.5 });   // number initialisation : jQuery widget      
+$( "#hslider" ).on( "slide", function( e, ui ) { $('#hspinner').spinner("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#hspinner" ).on( "spin", function( e, ui ) { $('#hslider').slider("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#hspinner" ).on( "change", function() {  varchange() } );
+
+//Variable t slider and number input types
+$('#tslider').slider({ max : 5.0, min : 1.0, step : 1 });   // slider initialisation : jQuery widget
+$('#tspinner').spinner({ max : 5.0, min : 1.0, step : 1 });   // number initialisation : jQuery widget      
+$( "#tslider" ).on( "slide", function( e, ui ) { $('#tspinner').spinner("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#tspinner" ).on( "spin", function( e, ui ) { $('#tslider').slider("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#tspinner" ).on( "change", function() {  varchange() } );
+
+//Variable l slider and number input types
+$('#lslider').slider({ max : 50.0, min : 30.0, step : 10 });   // slider initialisation : jQuery widget
+$('#lspinner').spinner({ max : 50.0, min : 30.0, step : 10 });   // number initialisation : jQuery widget      
+$( "#lslider" ).on( "slide", function( e, ui ) { $('#lspinner').spinner("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#lspinner" ).on( "spin", function( e, ui ) { $('#slider').slider("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#lspinner" ).on( "change", function() {  varchange() } );
+
+//Variable R slider and number input types
+$('#Rslider').slider({ max : 2, min : 1, step : 0.2 });   // slider initialisation : jQuery widget
+$('#Rspinner').spinner({ max : 2, min : 1, step : 0.2 });   // number initialisation : jQuery widget      
+$( "#Rslider" ).on( "slide", function( e, ui ) { $('#Rspinner').spinner("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#Rspinner" ).on( "spin", function( e, ui ) { $('#Rslider').slider("value",ui.value); ptx=[]; pty=[]; ptxdot=[]; ptxddot=[]; ptxdddot=[]; j=20;  ptx.push(b.ycoord-50); pty.push(o.xcoord+j);} );
+$( "#Rspinner" ).on( "change", function() {  varchange() } );
+
+varupdate();
+
+}
+
+function varupdate()
+{
+$('#rslider').slider("value", $('#rspinner').spinner('value'));  //updating r slider location with change in spinner(debug)
+$('#mslider').slider("value", $('#mspinner').spinner('value'));  //updating m slider location with change in spinner(debug)
+$('#tslider').slider("value", $('#tspinner').spinner('value'));  //updating M slider location with change in spinner(debug)
+$('#lslider').slider("value", $('#lspinner').spinner('value'));  //updating M slider location with change in spinner(debug)
+$('#Rslider').slider("value", $('#Rspinner').spinner('value'));  //updating R slider location with change in spinner(debug)
+$('#hslider').slider("value", $('#hspinner').spinner('value'));  //updating h slider location with change in spinner(debug)
+
+
+radius =$('#rspinner').spinner('value');
+radius_axle =$('#Rspinner').spinner('value');
+len_axle =$('#lspinner').spinner('value');
+t_flywheel =$('#tspinner').spinner('value');
+m = $('#mspinner').spinner('value');
+rcal =radius/100;
+rcal_axle =radius_axle/100;
+
+
+thetaa = 2*Math.PI*n1;   //to change height of fall of mass 
+r=0.01898;
+M = densConstant*Math.pow(rcal,3);
+Ival = ((M*Math.pow(rcal,2))/2);
+if(simstatus)
+{
+$("#moiDiv1").hide();
+$("#momentofinertia1").hide();
+$("#err1").hide();
+<!-- $("#moiDiv2").hide(); -->
+$("#momentofinertia2").hide();
+$("#err2").hide();
+$('#rslider').slider("enable"); 
+$('#rspinner').spinner("enable");
+$('#mslider').slider("enable"); 
+$('#mspinner').spinner("enable"); 
+$('#hslider').slider("enable"); 
+$('#hspinner').spinner("enable"); 
+
+$('#Mslider').slider("enable"); 
+$('#Mspinner').spinner("enable");
+
+$('#Rslider').slider("enable"); 
+$('#Rspinner').spinner("enable");
+$('#tslider').slider("enable"); 
+$('#tspinner').spinner("enable"); 
+$('#lslider').slider("enable"); 
+$('#lspinner').spinner("enable"); 
+
+
+//document.getElementById("earth_gav").disabled = false; 
+//document.getElementById("moon_gav").disabled = false; 
+document.getElementById("lock").disabled = false;
+document.getElementById("textarea0").innerHTML = "";
+document.getElementById("textarea1").innerHTML = "";
+ thetaa = 0;
+ thetab = 0;
+ thetac = 0;
+ thetad = 0;
+ thetaRot = 0;
+ 
+ t = 0;
+ dt = 0;
+ omegaa = 0;
+ omegab = 0;
+ omegabb = 0;
+ i=0, j=0;
+ flagEnd = false;
+ flagShift = false;
+ tt = 0;
+ time = 0;
+ speed=30;
+ rate=0.5;
+speedString = "Speed:Normal(x)";
+document.getElementById("speedText").style.color="goldenrod";
+document.getElementById("speedNote").classList.remove("visible");
+
+height = $('#hspinner').spinner('value');
+o2.ycoord=315-height*120;//-height*10; 
+
+}
+if(!simstatus)
+{
+
+radius =$('#rspinner').spinner('value');
+m = $('#mspinner').spinner('value');
+radius_axle =$('#Rspinner').spinner('value');
+len_axle=$('#lspinner').spinner('value');
+t_flywheel=$('#tspinner').spinner('value');
+
+
+//disabling silders when play button is pressed
+$('#rslider').slider("disable"); 
+$('#rspinner').spinner("disable");
+$('#mslider').slider("disable"); 
+$('#mspinner').spinner("disable"); 
+$('#Mslider').slider("disable"); 
+$('#Mspinner').spinner("disable"); 
+$('#Rslider').slider("disable"); 
+$('#Rspinner').spinner("disable"); 
+$('#hslider').slider("disable"); 
+$('#hspinner').spinner("disable");
+$('#tslider').slider("disable"); 
+$('#tspinner').spinner("disable");
+$('#lslider').slider("disable"); 
+$('#lspinner').spinner("disable");
+//document.getElementById("earth_gav").disabled = true; 
+//document.getElementById("moon_gav").disabled =true;
+  document.getElementById("lock").disabled =true;
+
+; 
+height = $('#hspinner').spinner('value');
+var temp_h =315-height*120;
+if(flagShift == false && thetab < thetaa)
+{
+  omegaa = ((m*gvt)/F) * (1-(Math.exp(-((F*r*time)/(Ival+(m*Math.pow(r,2)))))));
+  thetab = ((m*gvt*time)/F)+(((m*gvt)/F)*((Ival+(m*Math.pow(r,2)))/(F*r))*((Math.exp(-((F*r*time)/(Ival+(m*Math.pow(r,2)))))-1)));
+  <!-- console.log(thetab); -->
+  thetaRot = thetab;
+  tt = time;
+  thetaRot = deg(thetaRot);
+  thetaRot=thetaRot%360;
+  if(thetaRot<0)thetaRot+=360;
+  if(height==1.5)
+  o2.ycoord=temp_h+1.7*thetab;
+  if(height==1)
+  o2.ycoord=temp_h+1.1*thetab;
+  if(height==0.5)
+  o2.ycoord=temp_h+0.6*thetab;
+  height = o2.ycoord;
+
+}
+else if(flagEnd == false)
+{
+  rate = 0.25;
+  speed = 30;
+  speedString = "Speed:Double(2x)";
+  document.getElementById("speedText").style.color="red";
+  document.getElementById("speedNote").classList.add("visible");
+  omegabb = omegaa *(Math.exp(-((F*r*(time-tt))/(Ival))));
+  thetac = (-omegaa)*(Ival/(F*r))*((Math.exp(-((F*r*(time-tt))/(Ival))))-1);
+  flagShift = true;
+  thetaRot = thetac;
+  n2 = thetac/(2*Math.PI);
+  if(omegabb<=0.05)
+  {
+    pausewatch();
+    // Calculate total elapsed time from stopwatch (in seconds)
+    var elapsedTime = minute * 60 + second + count / 100;
+    resultValues(theoMoI, elapsedTime);
+    clearInterval(simTimeId);
+    flagEnd =true;
+    
+
+    
+  }
+  thetaRot = deg(thetaRot);
+  thetaRot=thetaRot%360;
+  if(thetaRot<0)thetaRot+=360;
+}
+}
+
+
+
+//coordintes 
+o.xcoord=0;
+o.ycoord=0;
+a.xcoord=(radius+25)*Math.cos(rad(thetaRot));
+a.ycoord=(radius+25)*Math.sin(rad(thetaRot));
+c.xcoord=180;
+c.ycoord=radius+25;
+d.xcoord=180;
+d.ycoord=-(radius+25);
+e.xcoord=c.xcoord+(rcal+15);
+e.ycoord=radius+25;
+f.xcoord=d.xcoord+(rcal+15);
+f.ycoord=-(radius+25);
+g.xcoord=180;
+g.ycoord=(radius+25)*Math.sin(rad(thetaRot));
+h.xcoord=g.xcoord+(rcal+15);
+h.ycoord=(radius+25)*Math.sin(rad(thetaRot));
+i.xcoord=50;
+i.ycoord=50;
+l.xcoord=380;
+l.ycoord=63;
+cn1.xcoord = o.xcoord;
+cn1.ycoord = o.ycoord+(radius+25);
+cn2.xcoord = o.xcoord;
+cn2.ycoord = o.ycoord-(radius+25);
+<!-- o1.ycoord=95; -->
+<!-- o1.xcoord=430; -->
+o2.xcoord=425;
+a1.ycoord=313;
+a1.xcoord=95;
+a2.xcoord=530;
+a2.ycoord=313;
+h1.ycoord=1;
+h1.xcoord=290;
+h2.xcoord=290;
+h2.ycoord=313;
+if(flagShift == true)
+{
+  o1.xcoord = 425;
+  o1.ycoord = 317;
+}
+else if(flagEnd == false)
+{
+  o1.ycoord=95;
+  o1.xcoord=425;
+}
+document.getElementById("v1").innerHTML =M.toFixed(3)+"kg";
+
+// start stopwatch when bob touches ground (use a1.ycoord as ground reference)
+if (simstatus==0 && !timerStartedOnTouch && typeof o2 !== 'undefined' && typeof a1 !== 'undefined'){
+    if (o2.ycoord >= a1.ycoord){
+        timerStartedOnTouch = true;
+        playwatch();
+    }
+}
+
+draw();
+
+}
+
+function draw()
+{
+
+
+  canvas = document.getElementById("simscreen");
+  ctx = canvas.getContext("2d");
+  ctx.clearRect(0,0,550,400);  //clears the complete canvas#simscreen everytime
+  
+  pointtrans(o,trans);
+  pointtrans(a,trans);
+ <!-- pointtrans(b,trans); -->
+  pointtrans(c,trans);
+  pointtrans(d,trans);
+  pointtrans(e,trans);
+  pointtrans(f,trans);
+  pointtrans(g,trans);
+  pointtrans(h,trans);
+  pointtrans(cn1,trans);
+  pointtrans(cn2,trans);
+  pointtrans(i,trans1);
+  //axel 
+  ctx.strokeStyle="#000";
+  ctx.rect(330,95,(rcal_axle+110+len_axle),2*(radius_axle));
+  ctx.stroke();
+  ctx.fillStyle="#CCCCCC";
+  ctx.fill();
+  ctx.closePath();
+  //flywheel circular
+  // Main outer circular flywheel
+  ctx.beginPath();
+  ctx.strokeStyle="#000";
+  ctx.arc(o.xcoord,o.ycoord,radius+30,0,2*Math.PI,false);
+  ctx.stroke();
+  ctx.fillStyle="#000";//black
+  ctx.fill();
+  ctx.closePath();
+
+// Main Flywheel inner circle 
+  ctx.beginPath();
+  ctx.strokeStyle="#000";
+  ctx.arc(o.xcoord,o.ycoord,radius+25,0,2*Math.PI,false);
+  ctx.stroke();
+  ctx.fillStyle="#6a6b6a";//grey  #c0c0c0
+  ctx.fill();
+  ctx.closePath();
+
+
+  
+  
+  //flywheel rectangle
+  ctx.beginPath();
+  ctx.strokeStyle="#000";
+  
+  ctx.fillRect(c.xcoord,c.ycoord,(rcal+t_flywheel+15),2*(radius+25));
+  ctx.fillStyle="#6a6b6a"; //grey
+  ctx.stroke(); 
+  ctx.fill();
+  ctx.closePath();
+  
+  //bearing1 
+  ctx.beginPath();
+  ctx.strokeStyle="#000";
+  ctx.fillStyle="#000";//grey 
+  ctx.fillRect(l.xcoord-52,l.ycoord+15,15,(40));
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
+
+  //bearing2
+  ctx.beginPath();
+  ctx.strokeStyle="#000";
+  ctx.fillStyle="#000";//grey 
+  ctx.fillRect(l.xcoord+52,l.ycoord+15,15,(40));
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
+
+  //height arrow(red arrow)
+  //height = $('#hspinner').spinner('value');
+  ctx.beginPath();
+  ctx.strokeStyle="#FF0000";
+  ctx.lineWidth=2;
+  ctx.moveTo(480,315-height*120 );//315-height*10
+	ctx.lineTo(550,315-height*120);
+  ctx.fillStyle="#FF0000";
+  ctx.fillText(height+" m",510,315-height*120-5);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.strokeStyle="#FF0000";
+  ctx.moveTo(480,315-height*120 );//315-height*10
+	ctx.lineTo(500,315-height*120+5);
+  ctx.lineTo(500,315-height*120-5);
+  ctx.fillStyle="#FF0000"
+  ctx.fill();
+
+  var k=document.getElementById("simscreen");
+  var ctx=k.getContext("2d");
+  
+  
+   // ctx.beginPath();
+  // ctx.fillStyle="goldenrod";
+  // ctx.font = "14px Comic Sans MS"
+  // ctx.fillText(speedString,45,95);
+  // ctx.closePath();
+
+   
+//Pivot and centre 
+  pointjoin(o,a,ctx,"#0cf54a",5); //green line circular flywheel
+  
+  for(n=0;n<17;n++)
+  if(thetaRot>(90+360*n)&&thetaRot<(270+360*n)){
+  pointjoin(g,h,ctx,"#0cf54a",5);//green line flat flywheel
+  } 
+  //partion line
+  pointjoin(h1,h2,ctx,"",2.5);
+  //weight string
+  pointjoin(o1,o2,ctx,"#000",1);
+  pointdisp(o2,ctx,(m+5),"#000000","#a8a7a5",'','','');//sliver weigth 
+  
+
+  //base(floor)
+  pointjoin(a1,a2,ctx,"#000",1.5);
+  //inner circle of circular fly wheel.
+  pointdisp(o,ctx,8,"#CCCCCC","#CCCCCC",'black','','');
+  <!-- pointdisp(a,ctx,8,"#000000","#a8a7a5",'','',''); -->
+    document.getElementById("speedText").innerHTML=speedString;
+  
+}
+
+
+
+</script>
+</head>
+
+<body onload="editcss();startsim();varinit();">
+
+
+<noscript>
+The simulation requires JavaScript to be enabled.
+</noscript>
+
+<div id="container">
+<div id="simtitle">Disc Type Flywheel Experiment</div>
+
+<canvas id="simscreen" height="400px" width="550px"></canvas>
+
+<div id="titleincanvas"></div>
+<div id="datatable1" class="datatable"></div>
+<div id="datatable2" class="datatable"></div>
+
+<div id="commentboxleft"><p id='const1' onmouseover='showTitle(this);'>M = <span class="colorClass" id="v1" ></span></p><p id='const2' onmouseover='showTitle(this);'>n1 = <span class="colorClass" id="v2">17 revolutions</span></p><p id='const3' onmouseover='showTitle(this);'>r = <span class="colorClass" id="v3">0.01898m</span></p><p id='const4' onmouseover='showTitle(this);'>T<sub>f</sub> = <span class="colorClass" id="v4">9.31*10<sup>-3</sup>Nm</span></p></div>
+<!-- <div style="font-family:verdana; font-size:14px;" id="commentboxright"></div> -->
+<p id="result1">Theoretical results</p>
+<p id="result">Experimental results</p>
+<div id="textarea0" style = "width:225px;height:110px"></div>
+<div id="textarea2" style = "width:225px;height:80px"></div>
+<!--textarea 1 is used to print the output of the theoritical momemt of inertia -->
+<div id="textarea1" style = "width:220px;height:55px"></div>
+<p id="speedText" style = "position:absolute;left:380px;top:275px;font:18px Monospace ;color:goldenrod"></p>
+
+<div id="vartitle">Initial Setup</div>
+<div id="vartitle1">Experimental Setup</div>
+
+<div id="vartitle2">Side View</div>
+<div id="vartitle3">Front View</div>
+
+<div id="variables">
+<div class="variable">
+<div class="varname"><p title="Radius of flywheel">Radius of Flywheel <br>(k in cm)</p>
+<input id="rspinner" title="Radius of flywheel"></input></div>
+<div id="rslider"title="Radius of flywheel"></div>
+</div>
+
+<div id = "mass_bob" class="variable">
+<div class="varname"><p title="Mass of bob">Mass of Bob <br> (m in kg)</p>
+<input id="mspinner" title="Mass of bob"></input></div>
+<div id="mslider" title="Mass of bob"></div>
+</div>
+
+<div id = "height_fall" class="variable">
+<div class="varname"><p title="Height of fall">Height of fall <br> (h in m)</p>
+<input id="hspinner" title="Height of fall"></input></div>
+<div id="hslider" title="Height of fall"></div>
+</div>
+
+
+
+
+
+<div id = "thickness" class="variable">
+  <div class="varname"><p title="Thickness of flywheel">Thickness of flywheel <br> (t in cm)</p>
+  <input id="tspinner" title="Thickness of flywheel"></input></div><br>
+  <div id="tslider" title="Thickness of flywheel"></div>
+</div>
+
+<div id = "length" class="variable">
+  <div class="varname"><p title="Length of axle">Length of axle <br> (l in cm)</p>
+  <input id="lspinner" title="Length of axle"></input></div><br>
+  <div id="lslider" title="Length of axle"></div>
+  </div>
+
+<div id = "radius" class="variable">
+<div class="varname"><p title="Radius of Axle">Radius of Axle <br> (r in cm)</p>
+<input id="Rspinner" title="Radius of Axle"></input></div><br>
+<div id="Rslider" title="Radius of Axle"></div>
+</div>
+
+
+
+
+
+<div id = "acc_gav" class="variable">
+<button id="lock" class="lock" onclick="TheoreticalMOI()">Lock</button>
+
+</div>
+
+
+</div>
+<div id="gravity">Gravity : 9.807 m/s² of Earth.</div>
+<div id="density">Density : 8000 kg/m3 of Steel.</div>
+<!-- <div id="theo_inertia">Theoritical moment of Inertia : </div> -->
+<div id="theoMoI"></div>
+
+<div id="ctrltitle">CONTROLS :</div>
+<div id="controls">
+  <input type="image" id="ruler" src="images\ruler_new.jpg" >
+   <input type="image" id="stopwatch" src="images\watch_stop.png" >
+    <input type="image" id="bolt1" src="images\Bolt head.png" >
+   <input type="image" id="bolt2" src="images\Bolt head.png" >
+    <input type="image" id="bolt3" src="images\Bolt head.png" >
+     <input type="image" id="bolt4" src="images\Bolt head.png" >
+
+<img id="playpausebutton" onclick="validateForm();"src="images/play.png" />
+<img id="reload" onclick="window.location.reload();"src="images/refresh.png" />
+<!-- <img id="rotationbutton" onclick="rotstate()" src="images/bluecwdull.png" /> --> 
+
+<div class="container1">
+        
+        <div id="time">
+            
+            <span class="digit" id="min">
+              00</span>
+            <span class="txt">:</span>
+            <span class="digit" id="sec">
+              00</span>
+            <span class="txt">:</span>
+            <span class="digit" id="count">
+              00</span>
+        </div>
+
+    </div>
+  </div>
+
+<div id="speedNote">⚠️ Speed: Double (2x) refers only to visual animation speed and does not affect actual ω or MOI calculations</div>
+<div id="resultValue"></div>
+<div id="n_1"></div>
+<div id="omega_"></div>
+<div id="n_2"></div>
+<div id="t_"></div>
+<div id="pracMoI"></div>
+<div id="errorNote" style="position:absolute; left:1100px; top:520px; width:220px; font-size:15px;"></div>
+<div id="copyright" title="Developer : Harsh Pathak and Shivangi Gupta , Dayalbagh Educational Instiute,Agra "></div>
+<div id="Developer_information" title=
+"Developer Name:
+             1.Harsh Pathak
+               (06hpathak@gmail.com)
+             2.Shivangi Gupta
+               (guptashivangi95366@gmail.com)
+Instiute Name: Dayalbagh Educational Instiute, Agra">
+</div>
+
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+</html> 

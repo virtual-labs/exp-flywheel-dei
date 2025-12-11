@@ -1,0 +1,82 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Which of the following factors affects the moment of inertia of a flywheel?",
+      "answers": {
+        "a": "The mass of the flywheel",
+        "b": "The radius of the flywheel",
+        "c": "The shape of the flywheel ",
+        "d": "All of the above"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+    "question": "How is the experimental moment of inertia of a flywheel determined?",
+      "answers": {
+        "a": "By measuring the rotational speed of the flywheel",
+        "b": "By measuring the force required to rotate the flywheel",
+        "c": "By measuring the angular acceleration of the flywheel",
+        "d": "By measuring the radius of the flywheel"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+    "question": "Which of the following is true about the moment of inertia of a flywheel?",
+      "answers": {
+        "a": "It increases as the mass of the flywheel increases",
+        "b": "It decreases as the radius of the flywheel decreases",
+        "c": "It is independent of the shape of the flywheel",
+        "d": "It is directly proportional to the speed of rotation of the flywheel"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+    "question": "In an experiment to determine the moment of inertia of a flywheel, which of the following quantities is varied?",
+      "answers": {
+        "a": "Mass of the flywheel",
+        "b": "Radius of the flywheel",
+        "c": "Angular velocity of the flywheel",
+        "d": "Torque applied to the flywheel"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which of the following statements is true about the flywheel",
+      "answers": {
+        "a": "A flywheel stores rotational energy",
+        "b": "A flywheel stores potential energy",
+        "c": "A flywheel stores kinetic energy",
+        "d": "A flywheel stores gravitational energy"
+      },
+       "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+    "question": "A flywheel rotates freely after the mass detaches. It completes N = 12 rotations before stopping, and the stopwatch shows t = 8 seconds. Compute the average angular velocity during this deceleration phase. (Use ω_avg = 2πN / t)",
+    "answers": {
+      "a": "2.5 rad/s",
+      "b": "4.7 rad/s",
+      "c": "9.4 rad/s",
+      "d": "12.5 rad/s"
+    },
+    "correctAnswer": "c",
+    "difficulty": "beginner"
+  },
+  {
+    "question": "When the falling mass detaches from the axle, the flywheel continues to rotate due to:",
+    "answers": {
+      "a": "The remaining potential energy of the falling mass",
+      "b": "The remaining tension in the string",
+      "c": "The rotational kinetic energy stored in the flywheel",
+      "d": "The torque due to air resistance"
+    },
+    "correctAnswer": "c",
+    "difficulty": "beginner"
+  }
+  ]
+}
